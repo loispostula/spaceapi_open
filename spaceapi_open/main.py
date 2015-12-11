@@ -1,6 +1,7 @@
-import config
-import node
-import output
+
+from spaceapi_open import config
+from spaceapi_open import node
+from spaceapi_open import output
 
 
 def main():
