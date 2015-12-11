@@ -1,8 +1,12 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
 import requests
+import sys
 
 CSI = "\x1B["
 reset = CSI + "m"
-
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 def is_open(node):
     try:
@@ -18,12 +22,12 @@ def is_open(node):
 
 
 def out_open(node, is_o):
-    out = CSI
+    out = ""
     if is_o:
-        out += '92m'
+        out += "#[fg=green]"
     else:
-        out += '91m'
-    out += u'\u2022' + CSI + '0m'
+        out += "#[fg=red]"
+    out += "%s%s" % ("•", "#[fg=white]")
     return out
 
 

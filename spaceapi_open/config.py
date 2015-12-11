@@ -1,25 +1,28 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
 import argparse
 
 
 class Config:
     def __init__(self):
+        self.parser = argparse.ArgumentParser()
         self._args = self._parse_args()
 
     def _parse_args(self):
-        parser = argparse.ArgumentParser()
-        parser.add_argument('-a', '--all',
+        self.parser.add_argument('-a', '--all',
                             action='store_true',
                             help="Return value for all registered spaceapi node")
-        parser.add_argument('-l', '--list',
+        self.parser.add_argument('-l', '--list',
                             action='store_true',
                             help='Return list of people present at the mentionned spaceapi node')
-        parser.add_argument('-r', '--refresh',
+        self.parser.add_argument('-r', '--refresh',
                             help='Refresh rate, default: 30')
-        parser.add_argument('place', nargs='*')
-        return vars(parser.parse_args())
+        self.parser.add_argument('place', nargs='*')
+        return vars(self.parser.parse_args())
+
+    def print_help(self):
+        self.parser.print_usage()
 
     def get(self, key, default=None):
-        val = self._args.get(key)
-        if not val:
-            return default
+        val = self._args[key]
         return val
